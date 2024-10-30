@@ -31,11 +31,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#3333',
         alignItems: 'center',
         justifyContent: 'flex-end',
         paddingHorizontal: 28,
-        paddingVertical: 4,
+        paddingVertical: 8,
     },
     checkBox: {
         flex: 1
