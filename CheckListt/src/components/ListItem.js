@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const ListItem = () => {
+const ListItem = props => {
     return(
         <View style={styles.container}>
             <BouncyCheckbox style={styles.checkBox}
@@ -20,7 +20,7 @@ const ListItem = () => {
                 textStyle={{ fontFamily: "JosefinSans-Regular" }}
                 onPress={(isChecked) => {console.log(isChecked)}}
             />
-            <Text style={styles.title}> 할 일을 체크  하자</Text>
+            <Text style={styles.title}>{props.title}</Text>
         </View>
     );
 };
