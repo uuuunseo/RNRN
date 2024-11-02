@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, ScrollView, TouchableOpacity, TextInput, SafeAr
 import ListItem from "./components/ListItem";
 
 function App() {
-    const [tasks, setTasks] = useState(["할 일", "한다고"]);
+    const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
     const inputRef = useRef(null);
 
@@ -12,12 +12,15 @@ function App() {
     }
 
     const onClickAddButton = () => {
+        if(newTask.trim()) {
+            setTasks([...tasks, newTask])
+        }
         setNewTask('')
         inputRef.current.focus();
     }
 
-    const onDeleteTask = (index) => {
-        const updateTasks = tasks.filter((_, i) => i !== index);
+    const onDeleteTask = (deleteIndex) => {
+        const updateTasks = tasks.filter((_, index) => index !== deleteIndex);
         setTasks(updateTasks);
     };
     

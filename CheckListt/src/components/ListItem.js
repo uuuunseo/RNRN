@@ -23,7 +23,7 @@ const ListItem = ({title, onDelete}) => {
                     console.log(isChecked);
                 }}
             />
-            {/* <Text style={styles.title} numberOfLines={1}>{props.title}</Text> */}
+            <Text style={styles.title} numberOfLines={1}>{title}</Text>
             <TouchableOpacity style={styles.editButton}>
                 <Text>수정</Text>
             </TouchableOpacity>
@@ -40,17 +40,14 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
         paddingVertical: 5,
         marginHorizontal: 7,
-        backgroundColor: '#29262e'
     },
     checkBox: {
         flex: 1,
-        marginRight: 10,
     },
     title: {
-        flex: 1,
+        flex: 7,
         fontSize: 20,
         marginRight: 10
     },
