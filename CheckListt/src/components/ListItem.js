@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const ListItem = ({title, onDelete}) => {
+const ListItem = ({title, onDelete, isChecked, onEdit }) => {
     return(
         <View style={styles.container}>
             <BouncyCheckbox
@@ -24,7 +24,7 @@ const ListItem = ({title, onDelete}) => {
                 }}
             />
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
-            <TouchableOpacity style={styles.editButton}>
+            <TouchableOpacity style={styles.editButton} onPress={onEdit}>
                 <Text>수정</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
