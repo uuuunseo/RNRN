@@ -1,35 +1,50 @@
-import React, { useState } from "react";
-import { View, StyleSheet, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 import ListItem from "./components/ListItem";
 
 function App() {
-    const [task, setTask] = useState('');
+    const [tasks, setTasks] = useState(["할 일", "한다고"]);
+    const [newTask, setNewTask] = useState('');
+    const inputRef = useRef(null);
 
     const onChangeTask = (inputTask) => {
-        setTask(inputTask)
+        setNewTask(inputTask)
     }
+
+    const onClickAddButton = () => {
+        setNewTask('')
+        inputRef.current.focus();
+    }
+
+    const onDeleteTask = (index) => {
+        const updateTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updateTasks);
+    };
     
     return( 
-        <View style={styles.total_container}>
+        <SafeAreaView style={styles.total_container}>
             <Text style={styles.title}>체크리스트</Text>
 
             <View style={styles.inputContainer}>
-            <TextInput
-                onChangeText={onChangeTask}
-                value={task}
-                placeholder="할 일을 입력하세요.."
-                style={{height: 40, borderColor: 'black', borderWidth: 1, paddingHorizontal: 8, cornerRadius: 8, flex: 9}}
-            />
+                <TextInput
+                    onChangeText={onChangeTask}
+                    value={newTask}
+                    placeholder="할 일을 입력하세요.."
+                    style={styles.inputTextField}
+                    ref={inputRef}
+                />
 
-            <TouchableOpacity style={styles.plusButton}>
+                <TouchableOpacity style={styles.plusButton} onPress={onClickAddButton}>
                     <Text style={{color: '#fff'}}> + </Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
             </View>
 
             <ScrollView contentContainerStyle={styles.checkListContainer}>
-                
+                {tasks.map((task, index) => (
+                    <ListItem key={index} title={task} onDelete={() => onDeleteTask(index)} />
+                ))}
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -63,6 +78,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     checkListContainer: {
-        marginTop: 10
+        marginTop: 30
+    },
+    inputTextField: {
+        height: 40, 
+        borderColor: 'black', 
+        borderWidth: 1, 
+        paddingHorizontal: 8, 
+        cornerRadius: 8, 
+        flex: 9
     }
 });

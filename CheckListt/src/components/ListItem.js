@@ -1,26 +1,35 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Dimensions } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
-const ListItem = props => {
+const ListItem = ({title, onDelete}) => {
     return(
         <View style={styles.container}>
-            <BouncyCheckbox style={styles.checkBox}
+            <BouncyCheckbox
+                style={styles.checkBox}
                 size={24}
                 fillColor="black"
                 unFillColor="white"
-                iconStyle={{ 
+                iconStyle={{
                     borderColor: "black",
                     borderRadius: 0
                 }}
-                innerIconStyle={{ 
+                innerIconStyle={{
                     borderWidth: 1,
                     borderRadius: 0
                 }}
                 textStyle={{ fontFamily: "JosefinSans-Regular" }}
-                onPress={(isChecked) => {console.log(isChecked)}}
+                onPress={(isChecked) => {
+                    console.log(isChecked);
+                }}
             />
-            <Text style={styles.title}>{props.title}</Text>
+            {/* <Text style={styles.title} numberOfLines={1}>{props.title}</Text> */}
+            <TouchableOpacity style={styles.editButton}>
+                <Text>수정</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteButton} onPress={onDelete}>
+                <Text>삭제</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -29,17 +38,31 @@ export default ListItem;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        paddingHorizontal: 28,
-        paddingVertical: 8,
+        paddingVertical: 5,
+        marginHorizontal: 7,
+        backgroundColor: '#29262e'
     },
     checkBox: {
-        flex: 1
+        flex: 1,
+        marginRight: 10,
     },
     title: {
-        flex: 9
+        flex: 1,
+        fontSize: 20,
+        marginRight: 10
+    },
+    editButton: {
+        padding: 5,
+        backgroundColor: '#ddd',
+        borderRadius: 5,
+        marginRight: 10
+    },
+    deleteButton: {
+        padding: 5,
+        backgroundColor: '#ddd',
+        borderRadius: 5
     }
 });
