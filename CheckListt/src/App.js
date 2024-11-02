@@ -6,7 +6,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
-    const [editTaskIndex, setEditTaskIndex] = useState(null);
+    const [editTaskId, setEditTaskId] = useState(null);
     const [editTaskText, setEditTaskText] = useState('');
     const inputRef = useRef(null);
 
@@ -16,31 +16,35 @@ function App() {
 
     const onClickAddButton = () => {
         if(newTask.trim()) {
-            setTasks([...tasks, { title: newTask, completed: false }])
+            const newTaskItem = { id: Date.now(), title: newTask, completed: false}
+            setTasks([...tasks, newTaskItem])
         }
         setNewTask('')
         inputRef.current.focus();
     }
 
-    const onDeleteTask = (deleteIndex) => {
-        const updateTasks = tasks.filter((_, index) => index !== deleteIndex);
+    const onDeleteTask = (deleteId) => {
+        const updateTasks = tasks.filter(task => task.id !== deleteId);
         setTasks(updateTasks);
     };
 
-    const onEditTask = (index) => {
-        setEditTaskIndex(index);
-        setEditTaskText(tasks[index].title);
-        setModalVisible(true)
+    const onEditTask = (id) => {
+        const taskToEdit = tasks.find(task => task.id == id)
+        if (taskToEdit) {     
+            setEditTaskId(id);
+            setEditTaskText(taskToEdit.title);
+            setModalVisible(true)
+        }
     }
 
     const onSaveTask = () => {
-        const updateTasks = tasks.map((task, index) =>
-            index === editTaskIndex ? { ...tasks, title: editTaskText } : task
+        const updateTasks = tasks.map(task =>
+            task.id === editTaskId ? { ...tasks, title: editTaskText } : task
         )
         setTasks(updateTasks)
-        setModalVisible(false)
-        setEditTaskIndex(null)
+        setEditTaskId(null)
         setEditTaskText('')
+        setModalVisible(false)
     }
     
     return( 
@@ -62,8 +66,14 @@ function App() {
             </View>
 
             <ScrollView contentContainerStyle={styles.checkListContainer}>
-                {tasks.slice().reverse().map((task, index) => (
-                    <ListItem key={index} title={task.title} onDelete={() => onDeleteTask(index)} isChecked={task.completed} onEdit={() => onEditTask(index)} />
+                {tasks.slice().reverse().map(task => (
+                    <ListItem 
+                        key={task.id} 
+                        title={task.title} 
+                        onDelete={() => onDeleteTask(task.id)} 
+                        isChecked={task.completed} 
+                        onEdit={() => onEditTask(task.id)} 
+                    />
                 ))}
             </ScrollView>
 
