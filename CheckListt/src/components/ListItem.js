@@ -19,9 +19,7 @@ const ListItem = ({title, onDelete, isChecked, onEdit }) => {
                     borderRadius: 0
                 }}
                 textStyle={{ fontFamily: "JosefinSans-Regular" }}
-                onPress={(isChecked) => {
-                    console.log(isChecked);
-                }}
+                onPress={isChecked}
             />
             <Text style={styles.title} numberOfLines={1}>{title}</Text>
             <TouchableOpacity style={styles.editButton} onPress={onEdit}>

@@ -1,16 +1,18 @@
 import React, { useRef, useState } from "react";
 import { View, StyleSheet, Text, ScrollView, TouchableOpacity, TextInput, SafeAreaView, Modal, Button } from "react-native";
 import ListItem from "./components/ListItem";
+import EditModal from "./components/EditModal";
 
 function App() {
     const [tasks, setTasks] = useState([]);
     const [newTask, setNewTask] = useState('');
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [editTaskId, setEditTaskId] = useState(null);
     const [editTaskText, setEditTaskText] = useState('');
     const inputRef = useRef(null);
 
     const onChangeTask = (inputTask) => {
+        console.log(inputTask)
         setNewTask(inputTask)
     }
 
@@ -18,8 +20,8 @@ function App() {
         if(newTask.trim()) {
             const newTaskItem = { id: Date.now(), title: newTask, completed: false}
             setTasks([...tasks, newTaskItem])
+            setNewTask('')
         }
-        setNewTask('')
         inputRef.current.focus();
     }
 
@@ -28,23 +30,33 @@ function App() {
         setTasks(updateTasks);
     };
 
+    const onChangeEditTaskText = (inputTask) => {
+        console.log(inputTask)
+        setEditTaskText(inputTask)
+    }
+
+    const onChangeIsModalVisible = (status) => {
+        setIsModalVisible(status)
+    };
+
     const onEditTask = (id) => {
+        console.log(id)
         const taskToEdit = tasks.find(task => task.id == id)
         if (taskToEdit) {     
             setEditTaskId(id);
             setEditTaskText(taskToEdit.title);
-            setModalVisible(true)
+            onChangeIsModalVisible(true)
         }
     }
 
     const onSaveTask = () => {
         const updateTasks = tasks.map(task =>
             task.id === editTaskId ? { ...tasks, title: editTaskText } : task
-        )
+        );
         setTasks(updateTasks)
         setEditTaskId(null)
         setEditTaskText('')
-        setModalVisible(false)
+        onChangeIsModalVisible(false)
     }
     
     return( 
@@ -81,19 +93,14 @@ function App() {
                 animationType="slide"
                 transparent={true}
                 visible={isModalVisible}
-                onRequestClose={() => setModalVisible(false)}
+                onRequestClose={() => setIsModalVisible(false)}
             >
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <TextInput
-                            value={editTaskText}
-                            onChangeText={setEditTaskText}
-                            style={styles.modalInput}
-                        />
-                        <Button title="저장" onPress={onSaveTask} />
-                        <Button title="취소" onPress={() => setModalVisible(false)} />
-                    </View>
-                </View>
+                <EditModal 
+                    editTaskText={editTaskText} 
+                    onChangeEditTaskText={() => onChangeEditTaskText}
+                    onSaveTask={() => onSaveTask} 
+                    onChangeIsModalVisible={() => setIsModalVisible(false)}
+                />
             </Modal>
         </SafeAreaView>
     );
@@ -139,25 +146,4 @@ const styles = StyleSheet.create({
         cornerRadius: 8, 
         flex: 9
     },
-    modalContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    },
-    modalContent: {
-        width: '80%',
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        alignItems: 'center'
-    },
-    modalInput: {
-        height: 40,
-        borderColor: 'black',
-        borderWidth: 1,
-        width: '100%',
-        marginBottom: 10,
-        paddingHorizontal: 8
-    }
 });
