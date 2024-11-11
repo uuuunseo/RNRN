@@ -7,6 +7,7 @@ import Location from './assets/Icons/Location.svg';
 import Vector from './assets/Icons/Vector.svg';
 import Happy from './assets/Happy.jpeg';
 import Hey from './assets/Hey.jpeg';
+import Header from "./components/Header";
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -17,18 +18,12 @@ function App() {
 
   return(
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={onClickBackButton}>
-          <WithLocalSvg
-            width={24}
-            height={24}
-            asset={ChevronLeft}
-            color={'#f5f5f5'}
-            style={{position: 'absolute', left: 0, marginLeft: 15}}
-          />
-        </TouchableOpacity>
-        <Text style={styles.navigationTitle}>리얼스토리 업로드</Text>
-      </View>
+      <Header 
+        onClickBackButton={onClickBackButton} 
+        iconImage={ChevronLeft}
+        title={"리얼스토리 업로드"}
+        style={styles.header}
+      />
 
       <View style={styles.promtBackground}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -89,22 +84,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     alignItems: 'center',
     paddingHorizontal: 15
-  },
-  header: {
-    height: 44, 
-    flexDirection: 'row', 
-    justifyContent: 'center', 
-    paddingHorizontal: 15,
-    backgroundColor: '#29262e'
-  },
-  navigationTitle: {
-    fontWeight: 700, 
-    fontSize: 16, 
-    lineHeight: 16, 
-    color: '#fff',
-    position: 'absolute', // 중앙에 배치하기 위한 절대 위치
-    left: '50%', // 화면의 중앙으로 이동
-    transform: [{ translateX: '-50%' }], // 중앙 정렬을 위한 이동
   },
   promtBackground: {
     flex: 1, 
