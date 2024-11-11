@@ -15,7 +15,11 @@ const screenWidth = Dimensions.get('window').width;
 function RealStoryView({navigation}) {
     const onClickBackButton = () => {
         console.log("뒤로가기 버튼 클릭")
-      }
+    }
+
+    const onClickApplyButton = () => {
+        console.log("확인 버튼 클릭")
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -39,16 +43,24 @@ function RealStoryView({navigation}) {
         <View>
         <Text style={styles.promtContext}>지금 무엇을 하고 있나요?</Text>
 
-        <View style={{flexDirection: 'row', height: 38, marginTop: 4}}>
-          <TextInput placeholder="{ 무언가를 }" placeholderTextColor='#666766' style={{fontWeight: 400, fontSize: 32, color: '#666766'}}/>
-          <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}> 하는 중</Text>
-          <WithLocalSvg
-            width={18}
-            height={18}
-            asset={Add}
-            color={'#666766'}
-            style={{marginLeft: 8}}
-          />
+        <View style={{flexDirection: 'row', height: 38, marginTop: 4, alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}>{'{ '}</Text>
+                <TextInput placeholder="무언가를" placeholderTextColor='#666766' style={{fontWeight: 400, fontSize: 32, color: '#F5F5F5'}}/>
+                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}>{' }'}</Text>
+            </View>
+
+            <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
+                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}> 하는 중</Text>
+                <TouchableOpacity style={{marginLeft: 8}} onPress={() => navigation.navigate('EditStoryView')}>
+                    <WithLocalSvg
+                        width={18}
+                        height={18}
+                        asset={Add}
+                        color={'#666766'}
+                    />
+                </TouchableOpacity>
+          </View>
         </View>
 
         <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
@@ -64,7 +76,7 @@ function RealStoryView({navigation}) {
       </View>
 
       <View>
-        <TouchableOpacity onPress={() => navigation.navigate('EditStoryView')} style={{width: 60, height: 60, backgroundColor: '#3AF199', borderRadius: 60, justifyContent: 'center', alignItems: 'center', marginBottom: 40}}>
+        <TouchableOpacity onPress={onClickApplyButton} style={{width: 60, height: 60, backgroundColor: '#3AF199', borderRadius: 60, justifyContent: 'center', alignItems: 'center', marginBottom: 40}}>
             <WithLocalSvg
               width={20}
               height={20}
