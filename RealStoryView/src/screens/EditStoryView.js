@@ -105,7 +105,7 @@ function EditStoryView({ navigation }) {
                         width={24}
                         height={24}
                         asset={Location}
-                        color={'#666766'}
+                        color={selectedLocation == '어딘가' ? '#666766' : '#F5F5F5'}
                     />
                     <Text style={[styles.actionText, { color: selectedLocation == '어딘가' ? '#666766' : '#F5F5F5' }]}>{selectedLocation}</Text>
                 </View>

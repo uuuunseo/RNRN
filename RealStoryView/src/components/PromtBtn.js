@@ -3,8 +3,8 @@ import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const PromtBtn = ({ title, onPress, isSelected }) => {
     return (
-        <TouchableOpacity onPress={(onPress)} style={[styles.background, {backgroundColor: isSelected ? '#3AF199' : '#232423'}]}>
-            <Text style={[styles.title, {color: isSelected ? '#2B2B2B' : '#AEB0AE'}]}>{title}</Text>
+        <TouchableOpacity onPress={(onPress)} style={[styles.background, { backgroundColor: isSelected ? '#3AF199' : '#232423' }]}>
+            <Text style={[styles.title, { color: isSelected ? '#2B2B2B' : '#AEB0AE' }]}>{title}</Text>
         </TouchableOpacity>
     )
 };
