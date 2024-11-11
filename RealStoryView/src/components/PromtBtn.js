@@ -1,10 +1,10 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-const PromtBtn = ({title, onPressButton, isActive}) => {
+const PromtBtn = ({title, onPress, isSelected}) => {
     return(
-        <TouchableOpacity style={[styles.container, {backgroundColor: isActive ? '#3AF199' : 'rgba(0, 0, 0, 0.5)'}]}>
-            <Text style={[styles.title, {color: isActive ? '#2B2B2B' : '#666766'}]}>{title}</Text>
+        <TouchableOpacity onPress={(onPress)} style={isSelected ? styles.selectedBackground : styles.background}>
+            <Text style={isSelected ? styles.selectedTitle : styles.title}>{title}</Text>
         </TouchableOpacity>
     )
 };
@@ -12,16 +12,32 @@ const PromtBtn = ({title, onPressButton, isActive}) => {
 export default PromtBtn;
 
 const styles = StyleSheet.create({
-    container: {
+    background: {
         paddingHorizontal: 14, 
         paddingVertical: 10, 
         borderRadius: 42, 
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    selectedBackground: {
+        paddingHorizontal: 14, 
+        paddingVertical: 10, 
+        borderRadius: 42, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#3AF199'
     },
     title: {
         fontWeight: 700, 
         fontSize: 14, 
-        lineHeight: 16
+        lineHeight: 16,
+        color: '#AEB0AE'
+    },
+    selectedTitle: {
+        fontWeight: 700, 
+        fontSize: 14, 
+        lineHeight: 16,
+        color: '#2B2B2B'
     }
 });

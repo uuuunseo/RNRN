@@ -6,11 +6,39 @@ import Location from '../assets/Icons/Location.svg';
 import PromtBtn from "../components/PromtBtn";
 
 const screenWidth = Dimensions.get('window').width;
-const statusMessages = ['독서', '공부', '힐링', '식사', '감상', '게임', '여행', '쇼핑', '운동', '상상', '이야기', '도전', '모험', '연애', '+'];
-const locationMessages = ['현위치', '학원', '학교', '공원', '식당', '도서관', '편의점', '카페', '핫플', '지하철', '도로 위']
+const statusMessages = [
+    {id: 1, status: '독서'}, 
+    {id: 2, status: '공부'},
+    {id: 3, status: '힐링'},
+    {id: 4, status: '식사'},
+    {id: 5, status: '감상'}, 
+    {id: 6, status: '게임'}, 
+    {id: 7, status: '여행'}, 
+    {id: 8, status: '쇼핑'}, 
+    {id: 9, status:'운동'}, 
+    {id: 10, status: '상상'}, 
+    {id: 11, status: '이야기'}, 
+    {id: 12, status: '도전'}, 
+    {id: 13, status: '모험'}, 
+    {id: 14, status: '연애'},
+];
+const locationMessages = [
+    {id: 1, location: '현위치'},
+    {id: 2, location: '학원'}, 
+    {id: 3, location: '학교'}, 
+    {id: 4, location: '공원'}, 
+    {id: 5, location: '식당'}, 
+    {id: 6, location: '도서관'}, 
+    {id: 7, location: '편의점'}, 
+    {id: 8, location: '카페'}, 
+    {id: 9, location: '핫플'}, 
+    {id: 10, location: '지하철'}, 
+    {id: 11, location: '도로 위'}
+];
 
 function EditStoryView() {
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeStatusButton, setActiveStatusButton] = useState(null);
+    const [activeLocationButton, setActiveLocationButton] = useState(null);
     const onClickCancelButton = () => {
         console.log("취소 버튼 클릭")
     }
@@ -19,9 +47,13 @@ function EditStoryView() {
         console.log("완료 버튼 클릭")
     }
 
-    const handlePressButton = (index) => {
-        setActiveButton(index === activeButton ? null : index);
+    const handleActiveStatusButton = (status) => {
+        setActiveStatusButton(status === activeStatusButton ? null : status);
     };
+
+    const handleActiveLocationButton = (location) => {
+        setActiveLocationButton(location === activeLocationButton ? null : location);
+    }
 
     return(
         <SafeAreaView style={{flex: 1, backgroundColor: '#000000', alignItems: 'flex-start', paddingHorizontal: 15}}>
@@ -51,12 +83,12 @@ function EditStoryView() {
             <View style={{marginTop: 57}}>
                 <Text style={{fontWeight: 500, fontSize: 28, lineHeight: 33, color: '#666766'}}>하는 중</Text>
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 16, gap: 12}}>
-                    {statusMessages.map((title, index) => (
+                    {statusMessages.map((item, _) => (
                         <PromtBtn
-                            key={index}
-                            title={title}
-                            onPressButton={() => handlePressButton(index)}
-                            isActive={activeButton === index}
+                            key={item.id}
+                            title={item.status}
+                            onPress={() => handleActiveStatusButton(item.id)}
+                            isSelected={activeStatusButton == item.id}
                         />
                     ))}
                 </View>
@@ -73,12 +105,12 @@ function EditStoryView() {
                     <Text style={{color: '#666766', fontWeight: 500, fontSize: 28, lineHeight: 33}}>어딘가</Text>
                 </View>
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 17, gap: 12}}>
-                    {locationMessages.map((title, index) => (
+                    {locationMessages.map((item, _) => (
                         <PromtBtn
-                            key={index}
-                            title={title}
-                            onPressButton={() => handlePressButton(index)}
-                            isActive={activeButton === index}
+                            key={item.id}
+                            title={item.location}
+                            onPress={() => handleActiveLocationButton(item.id)}
+                            isSelected={activeLocationButton == item.id}
                         />
                     ))}
                 </View> 
