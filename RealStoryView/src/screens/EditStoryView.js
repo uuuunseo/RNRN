@@ -15,7 +15,7 @@ const statusMessages = [
     {id: 6, status: '게임'}, 
     {id: 7, status: '여행'}, 
     {id: 8, status: '쇼핑'}, 
-    {id: 9, status:'운동'}, 
+    {id: 9, status: '운동'}, 
     {id: 10, status: '상상'}, 
     {id: 11, status: '이야기'}, 
     {id: 12, status: '도전'}, 
@@ -36,12 +36,9 @@ const locationMessages = [
     {id: 11, location: '도로 위'}
 ];
 
-function EditStoryView() {
+function EditStoryView({navigation}) {
     const [activeStatusButton, setActiveStatusButton] = useState(null);
     const [activeLocationButton, setActiveLocationButton] = useState(null);
-    const onClickCancelButton = () => {
-        console.log("취소 버튼 클릭")
-    }
 
     const onClickApplyButton = () => {
         console.log("완료 버튼 클릭")
@@ -56,9 +53,9 @@ function EditStoryView() {
     }
 
     return(
-        <SafeAreaView style={{flex: 1, backgroundColor: '#000000', alignItems: 'flex-start', paddingHorizontal: 15}}>
-            <View style={{height: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: screenWidth - 15,}}>
-                <TouchableOpacity onPress={onClickCancelButton} style={{position: 'absolute', left: 0}}>
+        <SafeAreaView style={{flex: 1, backgroundColor: '#000000', alignItems: 'center', paddingHorizontal: 15}}>
+            <View style={{height: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: screenWidth - 30,}}>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{position: 'absolute', left: 0}}>
                     <WithLocalSvg
                         width={24}
                         height={24}
@@ -72,7 +69,7 @@ function EditStoryView() {
                 </TouchableOpacity>
             </View>
 
-            <View style={{marginTop: 32}}>
+            <View style={{marginTop: 32, width: screenWidth - 30}}>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={{fontWeight: 400, fontSize: 32, lineHeight: 38, color: '#F5F5F5'}}>{'{ '}</Text>
                     <TextInput placeholder="무언가를" placeholderTextColor='#666766' color='#F5F5F5' style={{fontWeight: 500, fontSize: 28, lineHeight: 33}}/>
@@ -80,7 +77,7 @@ function EditStoryView() {
                 </View>
             </View>
 
-            <View style={{marginTop: 57}}>
+            <View style={{marginTop: 57, width: screenWidth - 30}}>
                 <Text style={{fontWeight: 500, fontSize: 28, lineHeight: 33, color: '#666766'}}>하는 중</Text>
                 <View style={{flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginTop: 16, gap: 12}}>
                     {statusMessages.map((item, _) => (
@@ -94,7 +91,7 @@ function EditStoryView() {
                 </View>
             </View>
 
-            <View style={{marginTop: 52}}>
+            <View style={{marginTop: 52, width: screenWidth - 30}}>
                 <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 4}}>
                     <WithLocalSvg
                         width={24}
@@ -117,7 +114,7 @@ function EditStoryView() {
             </View>
         </SafeAreaView>
     )
-}
+};
 
 export default EditStoryView;
 

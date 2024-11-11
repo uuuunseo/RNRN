@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
         borderRadius: 42, 
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+        backgroundColor: '#232423',
     },
     selectedBackground: {
         paddingHorizontal: 14, 
         paddingVertical: 10, 
-        borderRadius: 42, 
+        borderRadius: 42,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#3AF199'
