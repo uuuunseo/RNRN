@@ -7,9 +7,9 @@ import EditStoryView from "./screens/EditStoryView";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return(
+  return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RealStoryView" screenOptions={{ headerShown: false}}>
+      <Stack.Navigator initialRouteName="RealStoryView" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="RealStoryView" component={RealStoryView} />
         <Stack.Screen name="EditStoryView" component={EditStoryView} />
       </Stack.Navigator>

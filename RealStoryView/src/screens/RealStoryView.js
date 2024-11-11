@@ -12,7 +12,7 @@ import Header from "../components/Header";
 
 const screenWidth = Dimensions.get('window').width;
 
-function RealStoryView({navigation}) {
+function RealStoryView({ navigation }) {
     const onClickBackButton = () => {
         console.log("뒤로가기 버튼 클릭")
     }
@@ -21,71 +21,71 @@ function RealStoryView({navigation}) {
         console.log("확인 버튼 클릭")
     }
 
-    return(
+    return (
         <SafeAreaView style={styles.container}>
-      <Header 
-        onClickBackButton={onClickBackButton} 
-        iconImage={ChevronLeft}
-        title={"리얼스토리 업로드"}
-        style={styles.header}
-      />
+            <Header
+                onClickBackButton={onClickBackButton}
+                iconImage={ChevronLeft}
+                title={"리얼스토리 업로드"}
+                style={styles.header}
+            />
 
-      <View style={styles.promtBackground}>
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Image source={Happy} style={{width: 28, height: 28, borderRadius: 100}}/>
-          <Text style={{color: '#AEB0AE', marginLeft: 6, fontWeight: 700, fontSize: 14}}>안냥</Text>
-        </View>
+            <View style={styles.promtBackground}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Image source={Happy} style={{ width: 28, height: 28, borderRadius: 100 }} />
+                    <Text style={{ color: '#AEB0AE', marginLeft: 6, fontWeight: 700, fontSize: 14 }}>안냥</Text>
+                </View>
 
-        <View style={styles.realImage}>
-          <Image source={Hey} style={{width: '100%', height: '100%', borderRadius: 20}}/>
-        </View>
+                <View style={styles.realImage}>
+                    <Image source={Hey} style={{ width: '100%', height: '100%', borderRadius: 20 }} />
+                </View>
 
-        <View>
-        <Text style={styles.promtContext}>지금 무엇을 하고 있나요?</Text>
+                <View>
+                    <Text style={styles.promtContext}>지금 무엇을 하고 있나요?</Text>
 
-        <View style={{flexDirection: 'row', height: 38, marginTop: 4, alignItems: 'center'}}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}>{'{ '}</Text>
-                <TextInput placeholder="무언가를" placeholderTextColor='#666766' style={{fontWeight: 400, fontSize: 32, color: '#F5F5F5'}}/>
-                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}>{' }'}</Text>
+                    <View style={{ flexDirection: 'row', height: 38, marginTop: 4, alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={{ fontWeight: 400, fontSize: 32, color: '#666766' }}>{'{ '}</Text>
+                            <TextInput placeholder="무언가를" placeholderTextColor='#666766' style={{ fontWeight: 400, fontSize: 32, color: '#F5F5F5' }} />
+                            <Text style={{ fontWeight: 400, fontSize: 32, color: '#666766' }}>{' }'}</Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
+                            <Text style={{ fontWeight: 400, fontSize: 32, color: '#666766' }}> 하는 중</Text>
+                            <TouchableOpacity style={{ marginLeft: 8 }} onPress={() => navigation.navigate('EditStoryView')}>
+                                <WithLocalSvg
+                                    width={18}
+                                    height={18}
+                                    asset={Add}
+                                    color={'#666766'}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 30 }}>
+                        <WithLocalSvg
+                            width={20}
+                            height={20}
+                            asset={Location}
+                            color={"#666766"}
+                        />
+                        <Text style={{ color: '#666766', fontWeight: 500, fontSize: 22 }}>어딘가</Text>
+                    </View>
+                </View>
             </View>
 
-            <View style={{flexDirection: 'row', alignItems: 'flex-start'}}>
-                <Text style={{fontWeight: 400, fontSize: 32, color: '#666766'}}> 하는 중</Text>
-                <TouchableOpacity style={{marginLeft: 8}} onPress={() => navigation.navigate('EditStoryView')}>
+            <View>
+                <TouchableOpacity onPress={onClickApplyButton} style={{ width: 60, height: 60, backgroundColor: '#3AF199', borderRadius: 60, justifyContent: 'center', alignItems: 'center', marginBottom: 40 }}>
                     <WithLocalSvg
-                        width={18}
-                        height={18}
-                        asset={Add}
-                        color={'#666766'}
+                        width={20}
+                        height={20}
+                        asset={Vector}
+                        color={'#000000'}
                     />
                 </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
-          <WithLocalSvg
-            width={20}
-            height={20}
-            asset={Location}
-            color={"#666766"}
-          />
-          <Text style={{color: '#666766', fontWeight: 500, fontSize: 22}}>어딘가</Text>
-        </View>
-        </View>
-      </View>
-
-      <View>
-        <TouchableOpacity onPress={onClickApplyButton} style={{width: 60, height: 60, backgroundColor: '#3AF199', borderRadius: 60, justifyContent: 'center', alignItems: 'center', marginBottom: 40}}>
-            <WithLocalSvg
-              width={20}
-              height={20}
-              asset={Vector}
-              color={'#000000'}
-            />
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+            </View>
+        </SafeAreaView>
     )
 };
 
@@ -93,31 +93,31 @@ export default RealStoryView;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#000000',
-      alignItems: 'center',
-      paddingHorizontal: 15
+        flex: 1,
+        backgroundColor: '#000000',
+        alignItems: 'center',
+        paddingHorizontal: 15
     },
     promtBackground: {
-      flex: 1, 
-      backgroundColor: '#1B1B1B', 
-      height: 514,
-      width: screenWidth - 30,
-      borderRadius: 30,
-      marginBottom: 53, 
-      padding: 16,
-      marginTop: 12
+        flex: 1,
+        backgroundColor: '#1B1B1B',
+        height: 514,
+        width: screenWidth - 30,
+        borderRadius: 30,
+        marginBottom: 53,
+        padding: 16,
+        marginTop: 12
     },
     realImage: {
-      height: 313,
-      resizeMode: 'contain', 
-      alignItems: 'center',
-      marginTop: 8
+        height: 313,
+        resizeMode: 'contain',
+        alignItems: 'center',
+        marginTop: 8
     },
     promtContext: {
-      color: '#3AF199', 
-      fontWeight: 600, 
-      fontSize: 14, 
-      marginTop: 14
+        color: '#3AF199',
+        fontWeight: 600,
+        fontSize: 14,
+        marginTop: 14
     }
-  });
+});
