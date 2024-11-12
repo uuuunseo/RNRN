@@ -38,10 +38,17 @@ const locationMessages = [
 ];
 
 function EditStoryView({ navigation }) {
+    const [actionText, setActionText] = useState('');
+    const [isTextEntered, setIsTextEntered] = useState(null);
     const [activeStatusButton, setActiveStatusButton] = useState(null);
     const [activeLocationButton, setActiveLocationButton] = useState(null);
     const [selectedStatus, setSelectedStatus] = useState('하는');
     const [selectedLocation, setSelectedLocation] = useState('어딘가');
+
+    const onChangeActionText = (text) => {
+        setActionText(text)
+        setIsTextEntered(text.length !== 0 ? true : false)
+    }
 
     const onClickApplyButton = () => {
         console.log("완료 버튼 클릭")
@@ -76,9 +83,9 @@ function EditStoryView({ navigation }) {
 
             <View style={{ marginTop: 32, width: screenWidth - 30 }}>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.curlyBraceText}>{'{ '}</Text>
-                    <TextInput placeholder="무언가를" placeholderTextColor='#666766' color='#F5F5F5' style={styles.actionText} />
-                    <Text style={styles.curlyBraceText}>{' }'}</Text>
+                    <Text style={[styles.curlyBraceText, {color: isTextEntered ? '#F5F5F5' : '#666766'}]}>{'{ '}</Text>
+                    <TextInput onChangeText={onChangeActionText} placeholder="무언가를" placeholderTextColor='#666766' color='#F5F5F5' style={styles.actionText} />
+                    <Text style={[styles.curlyBraceText, {color: isTextEntered ? '#F5F5F5' : '#666766'}]}>{' }'}</Text>
                 </View>
             </View>
 
@@ -143,8 +150,7 @@ const styles = StyleSheet.create({
     curlyBraceText: {
         fontWeight: 400,
         fontSize: 32,
-        lineHeight: 38,
-        color: '#F5F5F5'
+        lineHeight: 38
     },
     actionText: {
         fontWeight: 500,
